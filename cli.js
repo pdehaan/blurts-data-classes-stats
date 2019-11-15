@@ -2,10 +2,10 @@
 
 const {dataClassesStats} = require("./lib");
 
-main();
+main(process.env.BREACHES_URL, process.env.MAX_RESULTS);
 
-async function main(breachesUrl = process.env.BREACHES_URL) {
-  const stats = await dataClassesStats(breachesUrl);
+async function main(breachesUrl, maxResults) {
+  const stats = await dataClassesStats(breachesUrl, maxResults);
   stats.forEach((r, idx) =>
     console.log(
       `${idx + 1}. ${r.Name} = ${Number(r.PwnCount).toLocaleString()}`
