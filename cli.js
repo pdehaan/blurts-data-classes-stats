@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 
-const {dataClassesStats} = require("./lib");
+const { dataClassesStats } = require("./lib");
 
-main(process.env.BREACHES_URL, process.env.MAX_RESULTS);
+const config = require("./config");
 
-async function main(breachesUrl, maxResults) {
-  const stats = await dataClassesStats(breachesUrl, maxResults);
+main(config.breachesUrl, config.maxResults, config.breachesSince);
+
+async function main(breachesUrl, maxResults, breachesSince) {
+  const since = new Date(breachesSince).toLocaleString();
+  console.info(`Fetching breaches since ${since}`);
+  const stats = await dataClassesStats(breachesUrl, maxResults, breachesSince);
   stats.forEach((r, idx) =>
     console.log(
       `${idx + 1}. ${r.Name} = ${Number(r.PwnCount).toLocaleString()}`

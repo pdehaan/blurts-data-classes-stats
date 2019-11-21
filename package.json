@@ -1,7 +1,7 @@
 {
   "name": "blurts-data-classes-stats",
   "description": "Statistics for Firefox Monitor breach data classes.",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "Peter deHaan",
   "bin": {
     "blurts-data-classes-stats": "cli.js"
@@ -10,7 +10,8 @@
     "url": "https://github.com/pdehaan/blurts-data-classes-stats/issues"
   },
   "dependencies": {
-    "got": "^9.6.0"
+    "axios": "^0.19.0",
+    "convict": "^5.2.0"
   },
   "devDependencies": {},
   "homepage": "https://github.com/pdehaan/blurts-data-classes-stats#readme",

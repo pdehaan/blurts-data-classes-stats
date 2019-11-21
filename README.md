@@ -14,6 +14,7 @@ The CLI accepts two arguments (via env vars):
 
 - `BREACHES_URL` &mdash; fully qualified domain and path to the breaches API. Default: "https://monitor.firefox.com/api/hibp".
 - `MAX_RESULTS` &mdash; the maximum number of returned records (sorted by total breached accounts in descending order). Default: 1000 (completely arbitrary number).
+- `BREACHES_SINCE` &mdash; date like string to filter breaches by. Example: "1970-01-01"
 
 The following command should show the top 10 most "popular" data classes in a breach:
 
@@ -25,6 +26,19 @@ The following command would query the HaveIBeenPwned API directly (if that's you
 
 ```sh
 BREACHES_URL=https://haveibeenpwned.com/api/v3/breaches npx pdehaan/blurts-data-classes-stats
+```
+
+#### OUTPUT
+
+```sh
+npx pdehaan/blurts-data-classes-stats --breaches-since="2019-1-1" --max-results=5
+
+Fetching breaches since 1/1/2019, 12:00:00 AM
+1. email addresses = 2,818,364,611
+2. passwords = 2,001,351,749
+3. names = 1,650,606,241
+4. geographic locations = 1,292,264,410
+5. ip addresses = 1,081,391,506
 ```
 
 ### API

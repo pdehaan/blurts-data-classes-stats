@@ -1,4 +1,6 @@
-const got = require("got").get;
+const axios = require("axios");
+
+const config = require("./config");
 
 module.exports = {
   dataClassesStats,
@@ -6,11 +8,12 @@ module.exports = {
 };
 
 async function dataClassesStats(
-  breachesUrl = "https://monitor.firefox.com/hibp/breaches",
-  maxResults = 1000
+  breachesUrl = config.breachesUrl,
+  maxResults = config.maxResults,
+  breachesSince = config.breachesSince
 ) {
   const stats = new Map();
-  const breaches = await getBreaches(breachesUrl);
+  const breaches = await getBreaches(breachesUrl, breachesSince);
   for (const breach of breaches) {
     breach.DataClasses.forEach(dataClass => {
       const current = stats.get(dataClass) || 0;
@@ -39,7 +42,10 @@ function sortBreaches(breachA, breachB) {
   return val;
 }
 
-async function getBreaches(breachesUrl) {
-  const breaches = await got(breachesUrl, { json: true });
-  return breaches.body;
+async function getBreaches(breachesUrl, breachesSince) {
+  const breachesSinceTime = new Date(breachesSince).getTime();
+  const breaches = await axios.get(breachesUrl);
+  return breaches.data.filter(
+    breach => new Date(breach.AddedDate).getTime() >= breachesSinceTime
+  );
 }
