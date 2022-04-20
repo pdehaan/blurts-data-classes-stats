@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "axios": "^0.21.2",
-    "convict": "^5.2.0"
+    "convict": "^6.2.2"
   },
   "devDependencies": {},
   "homepage": "https://github.com/pdehaan/blurts-data-classes-stats#readme",
